@@ -1,0 +1,265 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Ubuntu:wght@400;500;700&display=swap");
+
+:root {
+  --primaryColor: #dc3545;
+  --white: #fff;
+  --black: rgba(0, 0, 0, 0.7);
+  --black2: #333;
+  --yellow: #eb0bbbe8;
+  --blue: #e7f3ff;
+}
+
+body {
+  margin: 0px;
+  padding: 0px;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.condtion_text {
+  margin: 30px 0 0 10px;
+  font-size: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.hour_data {
+  margin: 0 50px 30px 40px;
+  width: 80%;
+}
+
+.today_icon {
+  margin: 0 0 0 55px;
+}
+
+.today_data {
+  font-size: 18px;
+  margin: 10px 0px 10px 55px
+}
+
+.time_data {
+  margin: 0 0 0 76px;
+  opacity: 0.8;
+}
+
+.mod {
+  margin: 20px;
+  justify-content: flex-end;
+  display: flex;
+}
+
+.Aqi {
+  margin: 0 0 0 55px;
+}
+
+.font {
+  margin: 30px 0 0 10px;
+  font-size: 55px;
+}
+
+.calender {
+  margin: 40px 0 0 30px
+}
+
+@media only screen and (max-width:600px) {
+  .Aqi {
+    margin: 0 0 0 0px;
+  }
+
+  .time_data {
+    margin: 0 0 0 40px;
+    opacity: 0.8;
+  }
+
+  .today_data {
+    font-size: 18px;
+    margin: 10px 0px 10px 15px
+  }
+
+  .today_icon {
+    margin: 0 0 0 15px;
+  }
+
+  .hour_data {
+    margin: 0 20px 30px 20px;
+    width: 90%;
+  }
+}
+
+.next_day {
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.35);
+  border-radius: 16px;
+  height: 200px;
+  width: 400px;
+  margin: 60px 0 0 60px;
+  position: absolute
+}
+
+.next_day1 {
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.35);
+  border-radius: 16px;
+  height: 200px;
+  width: 400px;
+  margin: 60px 0 0px 500px;
+  position: absolute
+}
+
+.next_day_head {
+  font-family: Muli, Helvetica Neue, Helvetica, Arial, sans-serif;
+  border-radius: 16px;
+  height: 400px;
+  margin: 50px 0 0 0
+}
+
+@media only screen and (max-width:1024px) {
+  .calender {
+    margin: 40px 0 0 30px
+  }
+
+  .next_day {
+    border-radius: 16px;
+    height: 200px;
+    width: 400px;
+    position: relative;
+    margin: 50px 0 0 30px;
+  }
+
+  .next_day1 {
+    border-radius: 16px;
+    height: 200px;
+    width: 400px;
+    position: relative;
+    margin: 50px 0 0px 30px;
+  }
+
+  .next_day_head {
+    font-family: Muli, Helvetica Neue, Helvetica, Arial, sans-serif;
+    border-radius: 16px;
+    height: 600px;
+    margin: 20px 0 0 0
+  }
+
+  .font {
+    margin: 40px 0 0 10px;
+    font-size: 25px;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .calender {
+    margin: 40px 0 0 0px; 
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .next_day {
+    border-radius: 16px;
+    height: 200px;
+    width: 330px;
+    position: relative;
+    margin: 40px 0 0 0px;
+
+  }
+.center_card
+{
+  display: flex;
+  align-content: center;
+  flex-wrap: wrap;
+  flex-direction:column;
+
+}
+  .next_day1 {
+    border-radius: 16px;
+    height: 200px;
+    width: 330px;
+    position: relative;
+    margin: 50px 0 0px 0px;
+  }
+
+  .next_day_head {
+    font-family: Muli, Helvetica Neue, Helvetica, Arial, sans-serif;
+    border-radius: 16px;
+    height: 600px;
+    margin: 20px 0 0 0
+  }
+
+  .font {
+    margin: 40px 0 0 10px;
+    font-size: 25px;
+  }
+}
+
+@media only screen and (max-width:321px) {
+  .calender {
+    margin: 40px 0 0 0px; 
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+  }
+  .Aqi {
+    margin: 0 0 0 0px;
+  }
+  .center_card
+  {
+    display: flex;
+    align-content: center;
+    flex-wrap: wrap;
+    flex-direction:column;
+  }
+  .time_data {
+    margin: 0 0 0 40px;
+    opacity: 0.8;
+  }
+
+  .today_data {
+    font-size: 18px;
+    margin: 10px 0px 10px 15px
+  }
+
+  .today_icon {
+    margin: 0 0 0 15px;
+  }
+
+  .hour_data {
+    margin: 0 0px 0px 0px;
+    width: 90%;
+  }
+
+  .modal-body {
+    padding: 0px;
+  }
+
+  .next_day {
+    border-radius: 16px;
+    height: 200px;
+    width: 300px;
+    position: relative;
+    margin: 40px 0 0 0px;
+  }
+
+  .next_day1 {
+    border-radius: 16px;
+    height: 220px;
+    width: 300px;
+    position: relative;
+    margin: 40px 0 0px 0px;
+  }
+
+  .next_day_head {
+    font-family: Muli, Helvetica Neue, Helvetica, Arial, sans-serif;
+    border-radius: 16px;
+    height: 600px;
+    margin: 20px 0 0 0;
+    width: fit-content;
+  }
+
+  .font {
+    margin: 40px 0 0 10px;
+    font-size: 25px;
+  }
+}

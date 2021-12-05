@@ -1,0 +1,55 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Ubuntu:wght@400;500;700&display=swap");
+:root {
+  --primaryColor: #dc3545;
+  --white: #fff;
+  --black: rgba(0, 0, 0, 0.7);
+  --black2: #333;
+  --yellow: #eb0bbbe8;
+  --blue: #e7f3ff;
+}
+body{
+    margin:0px;
+    padding:0px;
+  }
+ 
+.title{
+    display:flex;
+    justify-content:center;
+    color:var(--yellow);
+    margin: 0 0 0 10px;
+}
+img{
+    margin: 0 5px 0 10px;
+}
+.home {
+    margin: 0px 30px;
+    cursor: pointer;
+}
+.home:hover{
+    color:black;
+    background-color:rgb(153, 201, 201)
+}
+ 
+.search_btn{
+    margin-left:15px;
+    margin-right: 80px;
+}
+@media only screen and (max-width:766px)
+{
+    .home:hover{
+        color:var(--black2);
+        background-color:var(--white)
+    }
+    .search_btn{
+        margin:10px;
+    }
+ .home{
+     display: flex;
+     margin:0 0px 0 14px;
+ }
+ .input_box{
+    max-width: 250px;
+    max-height: 40px;
+    margin:10px;
+}
+}
