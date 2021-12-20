@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
-import forka from "./forecas.json";
 import lo from "./img/1.gif";
 import p from "./img/4.gif";
 import up from "./img/3.gif";
@@ -16,10 +15,12 @@ import DirectionsIcon from "@mui/icons-material/Directions";
 import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
 import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
 import AOS from "aos";
-// import axios from "axios";
+import swal from "sweetalert";
+
 const Home = () => {
-  const [data, setData] = useState({});
+  const [forka, setData] = useState({});
   const [values, setValue] = useState("");
+
   var api_key = "a0c9cb10e85d471187a52135210512";
   var location;
 
@@ -31,25 +32,23 @@ const Home = () => {
 
   const url = `https://api.weatherapi.com/v1/forecast.json?key=${api_key}&q=${location}&days=5&aqi=yes`;
 
-  // useEffect(() => {
-  //    axios.get(url).then((response) => {
-  //   const we = response.data;
-  //   setTimeout(() => {
-  //     setData(we);
-  //     console.log(data);
-  //   }, 3000);
-  // });
-  // }, []);
-
-  const fetch_weather = () => {
+  function fetch_weather() {
     fetch(url)
       .then((response) => response.json())
       .then((response) => {
-        setTimeout(() => {
-          setData(response);
-          console.log(data);
-        }, 13000);
+        AddingData(response);
+      })
+      .catch((error) => {
+        swal("ERROR..?", "Something Went Wrong try again Later", "error");
       });
+  }
+
+  const AddingData = (res) => {
+    if (res.error) {
+      swal("🤦‍♂️", "No matching location found", "warning");
+    } else {
+      setData(res);
+    }
   };
 
   const search = (e) => {
@@ -57,7 +56,7 @@ const Home = () => {
     if (values) {
       fetch_weather();
     } else {
-      console.log("enter your location");
+      swal("Enter Location..!", "No matching location found", "warning");
     }
   };
 
@@ -80,8 +79,8 @@ const Home = () => {
             <div className="modal-content">
               <div className="modal-header">
                 <h5 className="modal-title" id="exampleModalLabel">
-                  Today in {forka.location.name}{" "}
-                  {forka.location.localtime.slice(0, 11)}
+                  Today in {forka?.location?.name}{" "}
+                  {forka?.location?.localtime.slice(0, 11)}
                   Per Hour details
                 </h5>
                 <button
@@ -102,19 +101,21 @@ const Home = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {forka.forecast.forecastday[0].hour.map((forka, index) => (
-                      <tr key={index}>
-                        <td> {forka.time.slice(11)}</td>
-                        <td>
-                          {forka.temp_c}
-                          {"\u00b0"}
-                        </td>
-                        <td> {forka.condition.text}</td>
-                        <td>
-                          <img src={forka.condition.icon} alt="icon" />
-                        </td>
-                      </tr>
-                    ))}
+                    {forka?.forecast?.forecastday[0]?.hour.map(
+                      (forka, index) => (
+                        <tr key={index}>
+                          <td> {forka?.time?.slice(11)}</td>
+                          <td>
+                            {forka?.temp_c}
+                            {"\u00b0"}
+                          </td>
+                          <td> {forka?.condition?.text}</td>
+                          <td>
+                            <img src={forka?.condition?.icon} alt="icon" />
+                          </td>
+                        </tr>
+                      )
+                    )}
                   </tbody>
                 </table>
               </div>
@@ -234,8 +235,8 @@ const Home = () => {
             }}
           >
             <p className="text-light">
-              world {">"} {forka.location.country} {">"} {forka.location.region}{" "}
-              {">"} {forka.location.name}
+              world {">"} {forka?.location?.country} {">"}{" "}
+              {forka?.location?.region} {">"} {forka?.location?.name}
             </p>
           </div>
           <div className="col-xl-4 col-lg-4 col-md-4 col-sm ml-0 mr-0">
@@ -254,39 +255,39 @@ const Home = () => {
               >
                 <h4 className="today_data">
                   <img src={lo} alt="location" width="30px" height="30px" />
-                  Weather in {forka.location.name},{forka.location.country}
+                  Weather in {forka?.location?.name},{forka?.location?.country}
                 </h4>
                 <div className="d-flex">
                   <img
                     className="today_icon"
-                    src={forka.current.condition.icon}
+                    src={forka?.current?.condition?.icon}
                     alt="Partly cloudy"
                     width="100px"
                     height="120px"
                   />
                   <h3 style={{ margin: "30px 0 0 10px", fontSize: "55px" }}>
-                    {forka.current.temp_c}
+                    {forka?.current?.temp_c}
                     {"\u00b0"}
                   </h3>
                   <p className="condtion_text">
-                    <b> {forka.current.condition.text}</b>
+                    <b> {forka?.current?.condition?.text}</b>
                     <p style={{ opacity: "0.6", margin: "0px" }}>
-                      Feels Like {forka.current.feelslike_c}
+                      Feels Like {forka?.current?.feelslike_c}
                       {"\u00b0"}
                     </p>
                     <p style={{ opacity: "0.6", margin: "0px" }}>
                       <ArrowUpwardIcon />
-                      {forka.forecast.forecastday[0].day.maxtemp_c}
+                      {forka?.forecast?.forecastday[0]?.day?.maxtemp_c}
                       {"\u00b0"} <ArrowDownwardIcon />
-                      {forka.forecast.forecastday[0].day.mintemp_c}
+                      {forka?.forecast?.forecastday[0]?.day?.mintemp_c}
                       {"\u00b0"}
                     </p>
                   </p>
                 </div>
                 <p className="time_data">
-                  Time in {forka.location.name}
+                  Time in {forka?.location?.name}
                   {"  "}
-                  {forka.location.localtime.slice()}
+                  {forka?.location?.localtime.slice()}
                 </p>
                 <div className="mod">{modal()}</div>
                 <hr />
@@ -320,7 +321,7 @@ const Home = () => {
                           margin: "0px 0  0px 45px",
                         }}
                       >
-                        {forka.current.humidity}%
+                        {forka?.current?.humidity}%
                       </b>
                     </li>
                     <li
@@ -350,7 +351,7 @@ const Home = () => {
                           margin: "0px 0  0px 40px",
                         }}
                       >
-                        {forka.current.cloud}%
+                        {forka?.current?.cloud}%
                       </b>
                     </li>
                   </ul>
@@ -383,7 +384,7 @@ const Home = () => {
                           margin: "0px 0  0px 30px",
                         }}
                       >
-                        {forka.current.wind_kph}km/h
+                        {forka?.current?.wind_kph}km/h
                       </b>
                     </li>
                     <li
@@ -413,7 +414,7 @@ const Home = () => {
                           margin: "0px 0  0px 63px",
                         }}
                       >
-                        {forka.current.wind_dir}
+                        {forka?.current?.wind_dir}
                       </b>
                     </li>
                   </ul>
@@ -447,7 +448,8 @@ const Home = () => {
                     }}
                   >
                     <li>
-                      Co: {parseFloat(forka.current.air_quality.co).toFixed(2)}
+                      Co:{" "}
+                      {parseFloat(forka?.current?.air_quality?.co).toFixed(2)}
                     </li>
                     <li
                       style={{
@@ -455,7 +457,7 @@ const Home = () => {
                       }}
                     >
                       No2:{" "}
-                      {parseFloat(forka.current.air_quality.no2).toFixed(2)}
+                      {parseFloat(forka?.current?.air_quality?.no2).toFixed(2)}
                     </li>
                   </ul>
                   <ul
@@ -466,7 +468,8 @@ const Home = () => {
                     }}
                   >
                     <li>
-                      o3: {parseFloat(forka.current.air_quality.o3).toFixed(2)}
+                      o3:{" "}
+                      {parseFloat(forka?.current?.air_quality?.o3).toFixed(2)}
                     </li>
                     <li
                       style={{
@@ -474,7 +477,7 @@ const Home = () => {
                       }}
                     >
                       So2:{" "}
-                      {parseFloat(forka.current.air_quality.so2).toFixed(2)}
+                      {parseFloat(forka?.current?.air_quality?.so2).toFixed(2)}
                     </li>
                   </ul>
                 </div>
@@ -504,37 +507,43 @@ const Home = () => {
                   >
                     <h4 className="today_data">
                       <img src={lo} alt="location" width="30px" height="30px" />
-                      Weather in {forka.location.name},{forka.location.country}
+                      Weather in {forka?.location?.name},
+                      {forka?.location?.country}
                     </h4>
                     <div className="d-flex">
                       <img
-                        src={forka.forecast.forecastday[1].day.condition.icon}
+                        src={
+                          forka?.forecast?.forecastday[1]?.day?.condition?.icon
+                        }
                         alt="Partly cloudy"
                         width="100px"
                         height="120px"
                       />
                       <h3 className="font">
-                        {forka.forecast.forecastday[1].day.avgtemp_c}
+                        {forka?.forecast?.forecastday[1]?.day?.avgtemp_c}
                         {"\u00b0"}
                       </h3>
                       <p className="condtion_text">
                         <b>
                           {" "}
-                          {forka.forecast.forecastday[1].day.condition.text}
+                          {
+                            forka?.forecast?.forecastday[1]?.day?.condition
+                              ?.text
+                          }
                         </b>
                         <p style={{ opacity: "0.6", margin: "0px" }}>
                           <ArrowUpwardIcon />
-                          {forka.forecast.forecastday[1].day.maxtemp_c}
+                          {forka?.forecast?.forecastday[1]?.day?.maxtemp_c}
                           {"\u00b0"} <ArrowDownwardIcon />
-                          {forka.forecast.forecastday[1].day.mintemp_c}
+                          {forka?.forecast?.forecastday[1]?.day?.mintemp_c}
                           {"\u00b0"}
                         </p>
                       </p>
                     </div>
                     <p className="time_data">
-                      Time in {forka.location.name}
+                      Time in {forka?.location?.name}
                       {"  "}
-                      {forka.forecast.forecastday[1].date}
+                      {forka?.forecast?.forecastday[1]?.date}
                     </p>
                   </div>
                   <div
@@ -544,37 +553,39 @@ const Home = () => {
                   >
                     <h4 className="today_data">
                       <img src={lo} alt="location" width="30px" height="30px" />
-                      Weather in {forka.location.name},{forka.location.country}
+                      Weather in {forka?.location?.name},
+                      {forka?.location?.country}
                     </h4>
                     <div className="d-flex">
                       <img
-                        src={forka.forecast.forecastday[2].day.condition.icon}
+                        src={
+                          forka?.forecast?.forecastday[2]?.day?.condition?.icon
+                        }
                         alt="Partly cloudy"
                         width="100px"
                         height="120px"
                       />
                       <h3 className="font">
-                        {forka.forecast.forecastday[2].day.avgtemp_c}
+                        {forka?.forecast?.forecastday[2]?.day?.avgtemp_c}
                         {"\u00b0"}
                       </h3>
                       <p className="condtion_text">
                         <b>
-                          {" "}
-                          {forka.forecast.forecastday[2].day.condition.text}
+                          {forka?.forecast?.forecastday[2]?.day?.condition.text}
                         </b>
                         <p style={{ opacity: "0.6", margin: "0px" }}>
                           <ArrowUpwardIcon />
-                          {forka.forecast.forecastday[2].day.maxtemp_c}
+                          {forka?.forecast?.forecastday[2]?.day?.maxtemp_c}
                           {"\u00b0"} <ArrowDownwardIcon />
-                          {forka.forecast.forecastday[2].day.mintemp_c}
+                          {forka?.forecast?.forecastday[2]?.day?.mintemp_c}
                           {"\u00b0"}
                         </p>
                       </p>
                     </div>
                     <p className="time_data">
-                      Time in {forka.location.name}
+                      Time in {forka?.location?.name}
                       {"  "}
-                      {forka.forecast.forecastday[2].date}
+                      {forka?.forecast?.forecastday[2]?.date}
                     </p>
                   </div>
                 </div>
@@ -583,6 +594,58 @@ const Home = () => {
           </div>
         </div>
       </div>
+      <footer>
+        <div className="container-fluid " style={{ padding: "0px" }}>
+          <hr />
+          <div
+            className="row bg-primary"
+            style={{ padding: "0px", margin: "0px" }}
+          >
+            <div className="form-wrapper">
+              <div
+                className="social-list align-center sign-in"
+                style={{
+                  display: "flex",
+                  width: "100%",
+                  height: "70px",
+                  borderRadius: "5px",
+                }}
+              >
+                <div className="align-center facebook-bg">
+                  <i
+                    className="bx bxl-facebook"
+                    style={{ fontSize: "25px" }}
+                  ></i>
+                </div>
+                <div className="align-center google-bg">
+                  <i className="bx bxl-google" style={{ fontSize: "25px" }}></i>
+                </div>
+                <div className="align-center twitter-bg">
+                  <i
+                    className="bx bxl-twitter"
+                    style={{ fontSize: "25px" }}
+                  ></i>
+                </div>
+                <div className="insta-bg">
+                  <i
+                    className="bx bxl-instagram-alt"
+                    style={{ fontSize: "25px" }}
+                  ></i>
+                </div>
+              </div>
+              <h5
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  color: "white",
+                }}
+              >
+                @copyright 2021
+              </h5>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };
