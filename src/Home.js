@@ -20,11 +20,12 @@ import swal from "sweetalert";
 const Home = () => {
   const [forka, setData] = useState({});
   const [values, setValue] = useState("");
+  const [Default, setDefault] = useState("Bangalore");
 
   var api_key = "a0c9cb10e85d471187a52135210512";
-  var location;
-
-  location = "Bangalore";
+  if (Default !== "select") {
+    var location = Default;
+  }
 
   if (values) {
     location = values;
@@ -61,9 +62,11 @@ const Home = () => {
   };
 
   useEffect(() => {
-    fetch_weather();
+    if (Default !== "select") {
+      fetch_weather();
+    }
     AOS.init();
-  }, []);
+  }, [Default]);
 
   const modal = () => {
     return (
@@ -223,7 +226,7 @@ const Home = () => {
   return (
     <div className="container-fluid" style={{ padding: "0px" }}>
       {Navbar()}
-      <div className="container-fluid " style={{ padding: "0px" }}>
+      <div className="container-fluid" style={{ padding: "0px" }}>
         <div
           className="row"
           style={{ margin: "0px", backgroundColor: "#0072f5" }}
@@ -238,6 +241,21 @@ const Home = () => {
               world {">"} {forka?.location?.country} {">"}{" "}
               {forka?.location?.region} {">"} {forka?.location?.name}
             </p>
+            <div className="d-flex justify-content-end">
+              <select
+                style={{
+                  borderRadius: "5px",
+                  width: "150px",
+                  padding: "5px",
+                }}
+                onChange={(e) => setDefault(e.target.value)}
+              >
+                <option>select</option>
+                <option>Mumbai</option>
+                <option>Hyderabad</option>
+                <option>Chennai</option>
+              </select>
+            </div>
           </div>
           <div className="col-xl-4 col-lg-4 col-md-4 col-sm ml-0 mr-0">
             <div
